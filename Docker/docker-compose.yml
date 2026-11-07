@@ -1,0 +1,48 @@
+services:
+  airflow:
+    image: apache/airflow:3.1.5
+    container_name: retail_airflow
+    command: standalone
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../.env
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      DB_HOST: host.docker.internal
+      DB_PORT: "5432"
+      DB_NAME: retail_supply_chain
+      DB_USER: postgres
+    volumes:
+      - airflow_data:/opt/airflow
+      - ../Airflow:/opt/airflow/dags
+    restart: unless-stopped
+
+  superset:
+    image: retail-superset:local
+    build:
+      context: .
+      dockerfile: Dockerfile.superset
+    container_name: retail_superset
+    ports:
+      - "8088:8088"
+    environment:
+      SUPERSET_SECRET_KEY: "retail_supply_chain_secret_key_2026"
+    volumes:
+      - superset_data:/app/superset_home
+    command: >
+      /bin/sh -c "superset db upgrade &&
+      (superset fab create-admin
+      --username admin
+      --firstname Retail
+      --lastname Admin
+      --email admin@retail.local
+      --password Admin@123 || true) &&
+      superset init &&
+      superset run -h 0.0.0.0 -p 8088"
+    restart: unless-stopped
+
+volumes:
+  airflow_data:
+  superset_data:
+

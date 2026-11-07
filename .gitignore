@@ -1,0 +1,70 @@
+# ==========================================
+# RETAIL SUPPLY CHAIN CONTROL TOWER
+# Git Ignore Configuration
+# ==========================================
+
+# Environment variables and private credentials
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+credentials.json
+service-account.json
+
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Logs and temporary files
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Build and distribution files
+build/
+dist/
+*.egg-info/
+
+# Test and coverage files
+.coverage
+htmlcov/
+.tox/
+
+# Database backup and dump files
+*.dump
+*.bak
+*.backup
+
+# Docker overrides containing local secrets
+docker-compose.override.yml
+
+# Node dependencies (if any)
+node_modules/

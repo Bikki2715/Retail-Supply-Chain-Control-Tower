@@ -1,0 +1,38 @@
+# DA-03: Retail and Supply Chain Control Tower
+## Data Quality Report
+
+### 1. Dataset Summary
+
+| Dataset | Records | Duplicate Rows | Missing Values |
+|---|---:|---:|---:|
+| Suppliers | 100 | 0 | 0 |
+| Products | 1,000 | 0 | 0 |
+| Inventory | 10,000 | 0 | 0 |
+| Shipments | 50,000 | 0 | 2,618 |
+| Demand History | 365,000 | 0 | 0 |
+
+### 2. Shipment Data Validation
+
+Shipment status distribution:
+
+- Delayed: 26,890
+- Delivered: 20,492
+- In Transit: 2,618
+
+All 2,618 missing values occur in the actual_delivery column for In Transit shipments.
+
+### 3. Validation Results
+
+- No duplicate records found.
+- No missing values in suppliers, products, inventory, or demand history.
+- All Delivered shipments have actual delivery dates.
+- All Delayed shipments have actual delivery dates.
+- All In Transit shipments have missing actual delivery dates.
+
+### 4. Data Cleaning Decision
+
+Missing actual_delivery values for In Transit shipments are valid business conditions. They will be preserved rather than deleted or artificially imputed.
+
+### 5. Conclusion
+
+The five datasets contain 426,100 records in total. The initial data quality and shipment consistency checks passed. The datasets are ready for further analytics and KPI development.
